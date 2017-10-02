@@ -48,7 +48,10 @@
     }
     
     if (dictionary[@"timestamp"] != nil) {
-        self.timestamp = [NSDate dateWithTimeIntervalSince1970:[dictionary[@"timestamp"] timeInterval]];
+        NSNumber *ts = dictionary[@"timestamp"];
+        if (ts) {
+            self.timestamp = [NSDate dateWithTimeIntervalSince1970:ts.doubleValue];
+        }
     }
     
     NSArray *objectAttributes = @[@"channel", @"clientId", @"successful", @"authSuccessful", @"version", @"minimumVersion", @"supportedConnectionTypes", @"advice", @"error", @"subscription", @"data", @"ext"];
